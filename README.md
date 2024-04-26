@@ -23,4 +23,6 @@ pip install -r requirements_with_versions.txt
 
 ### Usage
 
-run `bot.py` file
+1. create file .env with API key and Telegram token with names `GIGACHAT_TOKEN` and `BOT_TOKEN` respectfully
+2. start redis server
+3. run `bot.py` file
