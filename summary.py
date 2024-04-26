@@ -18,11 +18,13 @@ def summary(sum_llm, text):
 		length_function = len,
 		is_separator_regex = False
 	)
-	documents = text_splitter.split_documents([documents]) # Text splitter 
-	sum_chain = load_summarize_chain(sum_llm, chain_type="map_reduce", 
-                             map_prompt=map_prompt,
-                             combine_prompt=combine_prompt,
-                             verbose=False
+	documents = text_splitter.split_documents([documents]) # Split text
+	
+	sum_chain = load_summarize_chain(
+		sum_llm, chain_type="map_reduce", 
+		map_prompt=map_prompt,
+		combine_prompt=combine_prompt,
+		verbose=False
 	)
 	
 	summary = sum_chain.invoke({"input_documents": documents}) # Taking summary
