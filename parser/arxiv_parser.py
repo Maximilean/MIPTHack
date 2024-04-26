@@ -1,7 +1,7 @@
 import urllib
 import feedparser
 
-
+# класс для парсинга статей
 class Parser:
     def __init__(self):
         self.base_url = "http://export.arxiv.org/api/query?"
@@ -10,10 +10,11 @@ class Parser:
 
     def __call__(self, search_query, max_results=None):
         """
-        search top-n articles by query
+        поиск первых статей по запросу
+        возвращает list(dict), где dict - отдельная статья
 
-        :search_query: - query
-        :max_results: - max_results searched
+        :search_query: - str, запрос
+        :max_results: - int, органичение сверху на количество статей
         """
         search = "all:" + urllib.parse.quote_plus(search_query)
         if max_results is None:
@@ -51,15 +52,15 @@ class Parser:
 
     def create_article(self, id, date, title, authors, abs_link, pdf_link, summary):
         """
-        creates a dictionary describing article with keys:
+        создает словарь, описывающий статью с ключами:
 
-        :id: - id on arxiv.org
-        :date: - date of publishing
-        :title: - title of the article
-        :authors: - authors
-        :abs_link: - link to page on arxiv.org
-        :pdf_link: - pdf link
-        :summary: - summary
+        :id: - str, id на arxiv.org
+        :date: - str, дата публикации
+        :title: - str, название
+        :authors: - str, авторы
+        :abs_link: - str, ссылка на страницу статьи
+        :pdf_link: - str, ссылка на pdf
+        :summary: - str, краткое содержание
         """
         book = {}
         book["id"] = id
