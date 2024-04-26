@@ -10,19 +10,18 @@ def summary(sum_llm, text):
 	documents = Document(page_content=text, metadata={"source": "local"})
 
 	text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 7000,
-    chunk_overlap  = 0,
-    length_function = len,
-    is_separator_regex = False
-    )
-
-    documents = text_splitter.split_documents([documents])
-    sum_chain = load_summarize_chain(sum_llm, chain_type="map_reduce", 
+		chunk_size = 7000,
+		chunk_overlap  = 0,
+		length_function = len,
+		is_separator_regex = False
+	)
+	documents = text_splitter.split_documents([documents])
+	sum_chain = load_summarize_chain(sum_llm, chain_type="map_reduce", 
                              map_prompt=map_prompt,
                              combine_prompt=combine_prompt,
                              verbose=False)
-
-    summary = sum_chain.invoke({"input_documents": documents})
-
-    return summary 
+	
+	summary = sum_chain.invoke({"input_documents": documents})
+	
+	return summary 
 
