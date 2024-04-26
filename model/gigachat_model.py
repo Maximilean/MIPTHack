@@ -11,6 +11,13 @@ from .pdf_reader import download_file
 
 
 def create_db(user_id, agent_id, texts):
+    """
+    создает папку с векторизированной базой данных статей via Chroma
+
+    :user_id: - str, ChatBot user's id
+    :agent_id: - str, agent_id for that user
+    :texts: - str or list(str), articles' texts
+    """
     if type(texts) != list:
         docs = text_splitter.create_documents([texts])
     else:
@@ -23,6 +30,13 @@ def create_db(user_id, agent_id, texts):
 
 
 def create_agent(user_id, agent_name, articles):
+    """
+    создает агента для данных статей
+
+    :user_id: - int, ChatBot user's id
+    :agent_id: - str, agent_id for that user
+    :articles: - list(dict), 
+    """
     user_id = str(user_id)
     files = []
     for article in articles:
@@ -32,6 +46,14 @@ def create_agent(user_id, agent_name, articles):
     create_db(user_id, agent_name, files)
 
 def get_answer(question, user_id, agent_id):
+    """
+    загружает Chromadb из папки, относящейся к user_id, agent_id
+    создает модель, получает ответ на запрос
+    
+    :question: - str, user's question
+    :user_id: - int, ChatBot user's id
+    :agent_id: - str, agent_id for that user
+    """
     user_id = str(user_id)
     dir = os.path.join(DIR_PATH, user_id)
     path = os.path.join(dir, agent_id)
@@ -43,6 +65,7 @@ def get_answer(question, user_id, agent_id):
     answer = qa_chain({"query": question})
     return answer
 
+# переменные, общие для всех user_id и agent_id
 DIR_PATH = "model/agents_database/"
 
 text_splitter = RecursiveCharacterTextSplitter(
