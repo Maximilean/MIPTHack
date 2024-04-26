@@ -2,7 +2,7 @@
 
 ### Hello :wave:
 
-This is repo with our solution for DEEPHACK.AGENTS :space_invader: 
+This is the repo with our solution for DEEPHACK.AGENTS :space_invader: 
 
 Using **GigaChat** :moyai: and **GigaChain** :link: for **Scientific Applications** :rocket: 
 
